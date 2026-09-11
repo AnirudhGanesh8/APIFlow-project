@@ -182,3 +182,87 @@
     border-right-color: var(--border);
   }
 }
+
+.invite-result {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.app-navigation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-icon-button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--text-h);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.nav-icon-button:hover {
+  background: var(--accent-bg);
+}
+
+.invite-result span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.invite-result .compact-button {
+  flex: 0 0 auto;
+}
+
+.invite-copy {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.invite-copy .error {
+  margin: 0;
+  max-width: 240px;
+}
+
+.invitations-panel {
+  margin-top: 24px;
+}
+
+.invitation-row,
+.invitation-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invitation-row {
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.invitation-row div:first-child,
+.pending-invite div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

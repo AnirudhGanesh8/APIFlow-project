@@ -33,8 +33,37 @@ class InviteCreate(BaseModel):
 
 
 class InviteOut(BaseModel):
+    id: UUID | None = None
+    email: EmailStr | None = None
+    role: WorkspaceRole | None = None
     invite_token: str
     invite_link: str
+    expires_at: datetime
+
+
+class InviteCreateResponse(BaseModel):
+    invite: InviteOut
+    email_sent: bool
+
+
+class PendingInviteOut(BaseModel):
+    id: UUID
+    email: EmailStr
+    role: WorkspaceRole
+    invited_by: UUID
+    created_at: datetime
+    expires_at: datetime
+    status: str = "pending"
+
+
+class MyInviteOut(BaseModel):
+    id: UUID
+    workspace_id: UUID
+    workspace_name: str
+    inviter_name: str
+    email: EmailStr
+    role: WorkspaceRole
+    created_at: datetime
     expires_at: datetime
 
 

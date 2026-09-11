@@ -61,25 +61,25 @@ Checkbox convention: `[ ]` not started, `[~]` in progress, `[x]` done. Each modu
 ## Module 2: Workspace
 
 ### Backend
-- [ ] `models/workspace.py`, `models/workspace_member.py` (role enum: owner/admin/member/viewer)
-- [ ] Alembic migration
-- [ ] `schemas/workspace.py`: `WorkspaceCreate`, `WorkspaceOut`, `InviteCreate`, `MemberOut`
-- [ ] `repositories/workspace_repository.py`
-- [ ] `services/workspace_service.py`: create (creator = owner), list-for-user, rename, delete (owner-only), invite generation, invite acceptance, role change
-- [ ] `core/deps.py`: add `require_role(workspace_id, minimum)` dependency per System-Design §6.2 permission matrix
-- [ ] `api/workspaces.py`: all endpoints from System-Design §5.2
-- [ ] Invite token: signed/random token with expiry, single-use or capped-use
+- [x] `models/workspace.py`, `models/workspace_member.py` (role enum: owner/admin/member/viewer)
+- [x] Alembic migration
+- [x] `schemas/workspace.py`: `WorkspaceCreate`, `WorkspaceOut`, `InviteCreate`, `MemberOut`
+- [x] `repositories/workspace_repository.py`
+- [x] `services/workspace_service.py`: create (creator = owner), list-for-user, rename, delete (owner-only), invite generation, invite acceptance, role change
+- [x] `core/deps.py`: add `require_role(workspace_id, minimum)` dependency per System-Design §6.2 permission matrix
+- [x] `api/workspaces.py`: all endpoints from System-Design §5.2
+- [x] Invite token: signed/random token with expiry, single-use or capped-use
 
 ### Frontend
-- [ ] `pages/WorkspaceList.jsx` — list + "create workspace" modal
-- [ ] `pages/WorkspaceSettings.jsx` — rename, delete, member list with role dropdowns (Admin+ only)
-- [ ] Invite flow UI: generate invite link, copy-to-clipboard; `pages/AcceptInvite.jsx` for the invited user
-- [ ] Route guarding: workspace routes check membership (via API 403 → redirect)
+- [x] `pages/WorkspaceList.jsx` — list + "create workspace" modal
+- [x] `pages/WorkspaceSettings.jsx` — rename, delete, member list with role dropdowns (Admin+ only)
+- [x] Invite flow UI: generate invite link, copy-to-clipboard; `pages/AcceptInvite.jsx` for the invited user
+- [x] Route guarding: workspace routes check membership (via API 403 → redirect)
 
 ### Tests
-- [ ] pytest: only members can view; only Admin+ can invite/change roles; only Owner can delete
-- [ ] pytest: invite accept adds `workspace_members` row with correct role
-- [ ] Manual: create workspace → invite second (test) account → accept → see it in both accounts
+- [x] pytest: only members can view; only Admin+ can invite/change roles; only Owner can delete
+- [x] pytest: invite accept adds `workspace_members` row with correct role
+- [x] Manual: create workspace → invite second (test) account → accept → see it in both accounts
 
 **✅ Milestone check (2nd half of 1st Review):** workspace creation/invites working alongside Auth.
 
@@ -88,20 +88,20 @@ Checkbox convention: `[ ]` not started, `[~]` in progress, `[x]` done. Each modu
 ## Module 3: Collections
 
 ### Backend
-- [ ] `models/collection.py`
-- [ ] Alembic migration
-- [ ] `schemas/collection.py`
-- [ ] `repositories/collection_repository.py`
-- [ ] `services/collection_service.py`: create/rename/delete, all workspace-membership-checked
-- [ ] `api/collections.py`
+- [x] `models/collection.py`
+- [x] Alembic migration
+- [x] `schemas/collection.py`
+- [x] `repositories/collection_repository.py`
+- [x] `services/collection_service.py`: create/rename/delete, all workspace-membership-checked
+- [x] `api/collections.py`
 
 ### Frontend
-- [ ] `pages/Workspace.jsx` — sidebar listing collections, "new collection" action
-- [ ] Rename/delete UI (inline edit or modal)
+- [x] `pages/Workspace.jsx` — sidebar listing collections, "new collection" action
+- [x] Rename/delete UI (inline edit or modal)
 
 ### Tests
-- [ ] pytest: CRUD respects role permissions (Member+ create/rename, Admin+ delete)
-- [ ] Manual: create/rename/delete a collection inside a workspace
+- [x] pytest: CRUD respects role permissions (Member+ create/rename, Admin+ delete)
+- [x] Manual: create/rename/delete a collection inside a workspace
 
 ---
 

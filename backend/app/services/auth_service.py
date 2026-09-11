@@ -203,3 +203,49 @@ class EmailService:
         with httpx.Client(timeout=10.0) as client:
             response = client.post("https://api.resend.com/emails", json=payload, headers=headers)
             response.raise_for_status()
+
+    @staticmethod
+    def send_workspace_invite_email(
+        *, to_email: str, workspace_name: str, inviter_name: str, role: str, invite_link: str, expires_at: datetime
+    ) -> bool:
+        _, parsed_email = parseaddr(to_email)
+        if not parsed_email:
+            return False
+
+        subject = f"You've been invited to join {workspace_name} on APIFlow"
+        html = (
+            f"<p>{inviter_name} invited you to join <strong>{workspace_name}</strong> on APIFlow.</p>"
+            f"<p>Your role will be <strong>{role}</strong>.</p>"
+            f'<p><a href="{invite_link}">Accept workspace invite</a></p>'
+            f"<p>This invite expires on {expires_at.isoformat()}.</p>"
+        )
+
+        if not settings.resend_api_key:
+            print(f"[dev-email] Workspace invite for {parsed_email}: {invite_link}")
+            return False
+
+        payload = {
+            "from": settings.resend_from_email,
+            "to": [parsed_email],
+            "subject": subject,
+            "html": html,
+        }
+        headers = {
+            "Authorization": f"Bearer {settings.resend_api_key}",
+            "Content-Type": "application/json",
+        }
+        try:
+            with httpx.Client(timeout=10.0) as client:
+                response = client.post("https://api.resend.com/emails", json=payload, headers=headers)
+                response.raise_for_status()
+        except httpx.HTTPStatusError as exc:
+            provider_detail = exc.response.text[:500]
+            print(
+                f"[invite-email-error] Resend rejected workspace invite to {parsed_email} "
+                f"with HTTP {exc.response.status_code}: {provider_detail}"
+            )
+            return False
+        except Exception as exc:
+            print(f"[invite-email-error] Could not send workspace invite to {parsed_email}: {exc}")
+            return False
+        return True

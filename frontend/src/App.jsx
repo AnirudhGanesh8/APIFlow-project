@@ -9,6 +9,8 @@ import ResetPassword from './pages/ResetPassword'
 import Signup from './pages/Signup'
 import AcceptInvite from './pages/AcceptInvite'
 import WorkspaceList from './pages/WorkspaceList'
+import Workspace from './pages/Workspace'
+import CollectionDetail from './pages/CollectionDetail'
 import WorkspaceSettings from './pages/WorkspaceSettings'
 
 function PublicRedirect() {
@@ -18,5 +20,5 @@ function PublicRedirect() {
 }
 
 export default function App() {
-  return <Routes><Route path="/" element={<PublicRedirect />} /><Route path="/login" element={<Login />} /><Route path="/signup" element={<Signup />} /><Route path="/forgot-password" element={<ForgotPassword />} /><Route path="/reset-password" element={<ResetPassword />} /><Route path="/oauth/callback" element={<OAuthCallback />} /><Route element={<ProtectedRoute />}><Route path="/dashboard" element={<Dashboard />} /><Route path="/workspaces" element={<WorkspaceList />} /><Route path="/workspaces/:workspaceId/settings" element={<WorkspaceSettings />} /><Route path="/accept-invite" element={<AcceptInvite />} /></Route><Route path="*" element={<Navigate to="/" replace />} /></Routes>
+  return <Routes><Route path="/" element={<PublicRedirect />} /><Route path="/login" element={<Login />} /><Route path="/signup" element={<Signup />} /><Route path="/forgot-password" element={<ForgotPassword />} /><Route path="/reset-password" element={<ResetPassword />} /><Route path="/oauth/callback" element={<OAuthCallback />} /><Route path="/accept-invite" element={<AcceptInvite />} /><Route element={<ProtectedRoute />}><Route path="/dashboard" element={<Dashboard />} /><Route path="/workspaces" element={<WorkspaceList />} /><Route path="/workspaces/:workspaceId" element={<Workspace />} /><Route path="/workspaces/:workspaceId/settings" element={<WorkspaceSettings />} /><Route path="/collections/:collectionId" element={<CollectionDetail />} /></Route><Route path="*" element={<Navigate to="/" replace />} /></Routes>
 }

@@ -3,8 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.api.auth import router as auth_router
+from app.api.collections import router as collection_router
 from app.api.health import router as health_router
-from app.api.workspaces import router as workspace_router
+from app.api.workspaces import my_invites_router, router as workspace_router
 from app.core.config import settings
 
 
@@ -22,6 +23,8 @@ def create_app() -> FastAPI:
 
     app.include_router(auth_router, prefix=settings.api_v1_prefix)
     app.include_router(workspace_router, prefix=settings.api_v1_prefix)
+    app.include_router(collection_router, prefix=settings.api_v1_prefix)
+    app.include_router(my_invites_router, prefix=settings.api_v1_prefix)
     app.include_router(health_router)
     return app
 
